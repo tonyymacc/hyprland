@@ -1,1 +1,0 @@
-/home/tony/.config/elephant/omarchy_themes.lua

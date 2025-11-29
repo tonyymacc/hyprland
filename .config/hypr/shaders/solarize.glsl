@@ -1,1 +1,0 @@
-/home/tony/Desktop/aether/shaders/solarize.glsl
