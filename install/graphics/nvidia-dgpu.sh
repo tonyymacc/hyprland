@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SYMLINK_NAME="nvidia-dgpu"
+RULE_PATH="/etc/udev/rules.d/nvidia-dgpu-dev-path.rules"
+NVIDIA_DGPU_ID=$(lspci -d ::03xx | grep 'NVIDIA' | cut -f1 -d' ')
+UDEV_RULE="$(
+  cat <<EOF
+KERNEL=="card*", \
+KERNELS=="0000:$NVIDIA_DGPU_ID", \
+SUBSYSTEM=="drm", \
+SUBSYSTEMS=="pci", \
+SYMLINK+="dri/$SYMLINK_NAME"
+EOF
+)"
+echo "$UDEV_RULE" | sudo tee "$RULE_PATH"
